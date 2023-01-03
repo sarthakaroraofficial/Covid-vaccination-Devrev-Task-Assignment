@@ -1,5 +1,5 @@
 
-NOTE : TO login as admin use : Email : admin@devrev.com  and Password : Devrev
+**NOTE **: To login as admin use : **Email** : **admin@devrev.com**  and **Password** : **Devrev**
 ## Tech Stack
 - HTML, CSS, Javascript
 - Bootstrap, jQuery
