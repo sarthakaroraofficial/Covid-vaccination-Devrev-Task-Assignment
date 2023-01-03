@@ -1,0 +1,22 @@
+{
+  "name": "sem4_dbms_project_covid_helper",
+  "version": "1.0.0",
+  "description": "Covid Helper",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "hbs": "^4.1.1",
+    "pdfkit": "^0.11.0",
+    "sequelize": "^6.3.5",
+    "sqlite3": "^5.0.0"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [
+    "Covid19"
+  ],
+  "author": "Abhilasha Bansal",
+  "license": "ISC"
+}
