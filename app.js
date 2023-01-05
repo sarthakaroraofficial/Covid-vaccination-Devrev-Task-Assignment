@@ -3,7 +3,7 @@ const app = express();
 
 
 //database
-const { db, Hospital, Hospital_Slots, Vac_Appts, Users, Bed_Reqs, Questions } = require('./db');
+const { db, Hospital, Hospital_Slots, Vac_Appts, Users } = require('./db');
 const session = require('express-session');
 
 app.use(session({
@@ -245,25 +245,7 @@ app.post('/add_slots', (req, res) => {
     }
 })
 
-// update bed count
-app.post('/update_bed_cnt', (req, res) => {
-    if (req.body.bed_cnt && req.body.id) {
-        Hospital.update({ bed_count: req.body.bed_cnt }, {
-            where: {
-                id: req.body.id
-            }
-        });
-        return res.send({ val: "Success!" });
-        // .then((hosp)=>{
-        //     return res.send({val: "Success!"});
-        // }).catch((error)=>{
-        //     return res.render('error', {error});
-        // })
-    }
-    else {
-        return res.render('error', { error: "Please enter all details to update bed count!" });
-    }
-})
+
 
 // get slots for particular date and hospital
 app.post('/getslots', (req, res) => {
@@ -365,29 +347,8 @@ app.get('/get_user_vacs', (req, res) => {
             return res.send({ found: false });
         })
 })
-app.get('/get_user_beds', (req, res) => {
-    if (!req.session) {
-        return res.send({ err: "Pl login first!" });
-    }
-    let email = req.session.email;
-    Bed_Reqs.findOne({
-        where: { email: email }
-    })
-        .then((data) => {
-            Hospital.findOne({
-                where: { id: data.hospital_id }
-            })
-                .then((data2) => {
-                    return res.send({ d1: data, d2: data2, found: true });
-                })
-                .catch((err) => {
-                    return res.render('error', { err });
-                })
-        })
-        .catch((err) => {
-            return res.send({ found: false });
-        })
-})
+
+
 
 
 

@@ -45,83 +45,7 @@ function show_vac_appts_hosp(id) {
     })
 }
 
-function show_bed_reqs_hosp(id) {
-    $("#div_1_2").empty();
-    let ele = $("#div_1_2");
-    $.post('/get_bed_reqs', {id}, (data, status)=>{
-        console.log(data);
-        if(status=="success"){
-            console.log("here");
-            $.each(data.data, function(index, item){
-                console.log("inside");
-                ele.append(
-                    `<div style="margin: 1%; background: lavender; padding: 2%;">
-                        <p>Email: ${item.email}</p>
-                        <p>Date: ${item.req_date}</p>
-                        <p>Slot: ${item.symptoms}</p>
-                        <p>Status: ${item.status}</p>
-                    </div>`
-                );
-                if(item.status=="Pending"){
-                    ele.append(
-                        `<div style="margin: 1%; background: lavenderblush; padding: 2%;" class="form-group">
-                            <label for="instructions">Instructions: </label>
-                            <input type="text" class="form-control" id="${"instructions_" + item.id.toString()}" name="instructions">
-                        </div>
-                        <button type="button" style="margin: 1%;" class="btn btn-primary" id="${"bedreq"+item.id.toString()}">Mark as Approved</button>
-                        <button type="button" style="margin: 1%;" class="btn btn-primary" id="${"bedreq_"+item.id.toString()}">Mark as Rejected</button>`
-                    );
-                    let idstr = "#bedreq"+item.id.toString();
-                    console.log(idstr);
-                    $(idstr).click(function(e){
-                        let hid = id;
-                        e.preventDefault();
-                        let instructions = $("#instructions_"+item.id.toString()).val();
-                        $.post('/complete_bed', {email: item.email, instructions, id: item.id, hosp_id: hid}, (data, status)=>{
-                            console.log(status, data);
-                            if(status=="success"){
-                                alert("Done!");
-                                document.location.href = './admin_dashboard.html';
-                            }
-                            else{
-                                alert("Some error occured!");
-                            }
-                        })
-                    })
-                    let idstr2 = "#bedreq_"+item.id.toString();
-                    console.log(idstr2);
-                    $(idstr2).click(function(e){
-                        e.preventDefault();
-                        console.log("hello mate");
-                        let st = "#instructions_"+item.id.toString();
-                        console.log(st);
-                        let instructions = $(st).val();
-                        console.log(instructions);
-                        $.post('/deny_bed', {email: item.email, instructions, id: item.id}, (data, status)=>{
-                            console.log("in post req");
-                            console.log(status, data);
-                            if(status=="success"){
-                                alert("Done!");
-                                document.location.href = './admin_dashboard.html';
-                            }
-                            else{
-                                alert("Some error occured!");
-                            }
-                        })
-                    })
-                }
-                else{
-                    ele.append(
-                        `<div style="margin: 1%; background: lavenderblush; padding: 2%;">
-                        <p>Instructions: ${item.instructions}</p>
-                        </div>`
-                    );
-                    
-                }
-            })
-        }
-    })
-}
+
 
 function display_hospitals(){
     $('#hosp-list').empty();
@@ -166,7 +90,7 @@ function display_hospitals(){
                 // console.log(hospital_data[i].bed_count);
                 $("#bed_cnt1").val(hospital_data[i].bed_count);
                 show_vac_appts_hosp(hosp_id);
-                show_bed_reqs_hosp(hosp_id);
+                
             });
         }
     }).catch((err)=>{
