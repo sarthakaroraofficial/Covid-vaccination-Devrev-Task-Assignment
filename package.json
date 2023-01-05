@@ -1,7 +1,7 @@
 {
-  "name": "sem4_dbms_project_covid_helper",
+  "name": "devrev_task",
   "version": "1.0.0",
-  "description": "Covid Helper",
+  "description": "Covid Vaccination",
   "main": "app.js",
   "dependencies": {
     "express": "^4.17.1",
@@ -18,6 +18,6 @@
   "keywords": [
     "Covid19"
   ],
-  "author": "Abhilasha Bansal",
+  "author": "Sarthak Arora",
   "license": "ISC"
 }

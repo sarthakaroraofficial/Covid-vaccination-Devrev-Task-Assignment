@@ -137,74 +137,8 @@ const Vac_Appts = db.define('vac_appts', {
     }
 })
 
-// table for bed requests 
-const Bed_Reqs = db.define('bed_reqs', {
 
-    email: {
-        type: sequelize.STRING(60),
-        allowNull: false
-    },
-
-    hospital_id: {
-        type: sequelize.INTEGER
-    },
-
-    req_date: {
-        type: sequelize.DATEONLY,
-        // allowNull: false
-        defaultValue: sequelize.NOW
-    },
-
-    symptoms: {
-        type: sequelize.TEXT,
-        allowNull: false
-    },
-
-    status: {
-        type: sequelize.STRING(20),
-        defaultValue: "Pending"
-    }, 
-
-    instructions: {
-        type: sequelize.TEXT,
-        allowNull: true
-    }
-})
-
-// table for ques & answers
-const Questions = db.define('questions', {
-
-    posted_by_name: {
-        type: sequelize.STRING(60), // put username
-        // allowNull: false,
-    },
-
-    posted_by_email: {
-        type: sequelize.STRING(60), // put email 
-        allowNull: false,
-    },
-
-    date: {
-        type: sequelize.DATEONLY,
-        defaultValue: sequelize.NOW
-    },
-
-    question: {
-        type: sequelize.TEXT,
-        allowNull: false
-    },
-
-    answer: {
-        type: sequelize.TEXT,
-        defaultValue: "This question is yet to be answered."
-    }, 
-
-    status: {
-        type: sequelize.STRING(20),
-        defaultValue: "Pending"
-    }
-})
 
 module.exports = {
-    db, Hospital, Hospital_Slots, Vac_Appts, Users, Bed_Reqs, Questions
+    db, Hospital, Hospital_Slots, Vac_Appts, Users
 }
