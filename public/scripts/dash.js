@@ -216,7 +216,7 @@ function display_hospitals() {
         $("#btn3").click(function (e) {
             // e.preventDefault();
 
-            // add check for 0 bed count
+            
             let email = $("#email_user").val();
             let hospital_id = $("#hosp_id_3").val();
             let symptoms = $("#symptoms").val();
