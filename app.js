@@ -21,9 +21,7 @@ app.set('view engine', 'hbs');
 app.use("/", express.static(__dirname + '/public'));
 
 
-// requests
-const forum = require('./routes/forum');
-app.use('/forum', forum);
+
 
 // signup
 app.post('/signup', (req, res) => {
@@ -177,25 +175,6 @@ app.post('/add_hospital', (req, res) => {
     }
 })
 
-// add a question
-app.post('/add_question', (req, res) => {
-    // insert check to see for repeat
-    if (req.body.email && req.body.question) {
-        Questions.create({
-            posted_by_email: req.body.email,
-            question: req.body.question
-        }).then((user) => {
-            return res.send({ val: "success" });
-        }).catch((error) => {
-            //throw error;
-            return res.render('error', { error, text: "Some error occured, while adding! Please try again." });
-        })
-    }
-    else {
-        return res.render('error', { error: "Please enter all details to add a question!" });
-    }
-})
-
 // show all hospitals
 app.get('/show_hospitals', (req, res) => {
     Hospital.findAll()
@@ -207,16 +186,6 @@ app.get('/show_hospitals', (req, res) => {
         })
 })
 
-// show all ques
-app.get('/all_ques', (req, res) => {
-    Questions.findAll()
-        .then((data) => {
-            return res.send(data);
-        })
-        .catch((err) => {
-            return res.render('error', { err });
-        })
-})
 
 // add slots for hosp if possible
 app.post('/add_slots', (req, res) => {
